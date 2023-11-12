@@ -1,0 +1,84 @@
+
+body{
+	font-family:"Century Gothic",serif;
+	background-color:white;
+	margin:0px;
+	padding:0px;
+}
+
+
+.div1,.div2,.div3{
+	display:inline-block;
+	margin:1.5%;
+	width:28%;
+	height:200px;
+	border: 1px solid black;
+}
+div:first-child{
+	margin-left:4%;
+}
+
+div:last-child{
+	margin-right:4%;
+}
+.div1{
+	background-color:green;
+}
+.div2{
+	background-color:blue;
+}
+.div3{
+	background-color:red;
+}
+@media screen (max-width:700px){
+	.div1,.div2,.div3{
+		width:100%;
+		margin:0px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul{
+	list-style-type:none;
+	
+	text-align:center;
+	margin-top:200px;
+}
+li:before{
+	content:'->';
+	color:red;
+}
+
+li:after{
+	content:' .';
+	color:green;
+}
+ul{
+	border: 1px solid black;
+}
+
+ul:before{	
+	content:'->';
+	color:red;
+	background-color: black;
+	margin-top:50px;
+	padding:30px;
+}
+
+ul:after{
+	content:' .';
+	color:green;
+}

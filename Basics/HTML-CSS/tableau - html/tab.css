@@ -1,0 +1,25 @@
+td{
+	border: 1px solid black;
+	padding:10px;
+	width:100px;
+	text-align:left;
+}
+table{
+	border-collapse:collapse;
+	float:right;
+	margin-top:250px;
+	margin-right:250px;
+}
+.Titre{
+	text-align:center;
+	font-weight:bold;
+	font-style:oblique;
+}
+
+tr:nth-child(even){/* pour cibler les lignes impair*/
+	background-color:orange;
+}
+
+tr:nth-child(odd){/* pour cibler les lignes paire */
+	background-color:blue;
+}

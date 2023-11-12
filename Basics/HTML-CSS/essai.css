@@ -1,0 +1,66 @@
+body{
+	margin:0px;
+	padding:0px;
+}
+
+.p12{
+	width:50%;
+	height:100px;
+	margin:0px;
+	color:RGBa(255,255,0,0.8)
+}
+
+.p1{
+	width:80%;
+}
+
+.p2{
+	border:1px solid red;
+}
+
+
+/* La propriete line-height: set a difinir les espaces en les lignes d'un element */
+/* La propriete letter spacing et word-spacing set de determiner les espace en les lettres et les mots succesivements*/
+/* 0 est la valeur par defauts donc on peut donner une valeur negatif */
+/* set a decaler le text ou le mot de pixel cité*/
+.p1{
+	line-height:20px;
+	
+}
+.p1{
+	line-height:40px;
+	
+}
+/***********************************************
+
+
+
+
+
+/* Border : epesseur style couleur */
+.p1{
+	width:500px;
+	height: 500px;
+	border: 1px solid black;
+/*	border-radius:500px;*/
+	text-align:center;
+}
+/* style du css : solid , dotted, dashed ,double,groove, nidge,inset , outset*/
+/* pour la precision en met a la place de border > border-top ou border-bottom */
+.p2{
+	border-width:5px;
+	border-style: inset;
+	border-color: yellow;
+	border-top: 5px dotted red;
+	border-bottom: 5px dashed yellow;
+	border-left: 5px double orange;
+	border-right: 5px groove blue;
+/*	border-radius: 2px;*/
+}
+/* padding : top right bottom left*/
+
+.p12{
+	box-shadow: 5px 5px 5px orange inset;
+	display:inline;
+}
+/* la propriete position annule la propriete float */

@@ -1,0 +1,76 @@
+audio,video,iframe{
+	width:400px;
+	border: 1px solid black;
+	border-radius:30px;
+	position:relative;
+	left:400px;
+	top:400px;
+}
+
+body{
+	background-image:url("pieceJointe\\bureau.png"),url("pieceJointe\\bureau.png");
+	background-size:25%,50%;/* il faut mieux mettre que la largeur et pas la hauteur */
+	background-repeat:no-repeat,no-repeat;
+	background-position: top left ,top right;// soit top right et tt soit des valeurs relative soit des valeurs en pixel paraport au top right
+	background-attachment:scroll;
+}
+
+/*pseudo class*/
+/* link : styliser un lien non visite , visited : stylisr un lien qui a ete visite , hover : passer le cursseur avec le curseur , active: lors d'un click*/
+
+h1{
+	display : inline;
+}
+
+h1:hover
+{
+	color:red;
+}
+
+
+a:link{
+	color:blue;
+}
+a:hover{
+	font-weight:bold;
+}
+a:visited{
+	color:purple;
+}
+/*
+p:last-child{
+	color:red;
+}
+
+p:nth-child(even){     pair ou impaire : even odd
+	color: red ;
+}
+*/
+p:nth-child(2){
+	
+}
+p::first-letter{ /* ce lui la marche que pour les elements de type block / il est utiliser dans : font, border,margin , background ,color,padding , text-decoration et transforme et float elign line-height */
+	font-size:300%;
+	color:#A92;
+}
+p::first-line{ /* ce lui la marche que pour les elements de type block / il est utiliser dans : font, border,margin , background ,color,padding , text-decoration et transforme et float elign line-height */
+	font-size:200%;
+	color:red;
+}
+/* mettre un style lors de la selection d'une element*/
+p::selection{
+	background-color:#A92;
+}
+
+/* before after permet de rajouter un truc avant un elemnet et apres  */
+body{
+	margin:50px;
+	border:1px solid black;
+}
+body::before{
+	content=url("pieceJointe\\bureau.png");url("pieceJointe\\bureau.png");
+}
+body::after{
+	content:url("pieceJointe\\bureau.png");
+}
+

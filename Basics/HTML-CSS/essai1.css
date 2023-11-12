@@ -1,0 +1,32 @@
+.p12{
+	border :1px solid black;
+	
+}
+
+.p1{
+	border: 1px solid black;
+	/*display:inline-block;*/
+	/*width:50%;*/
+	display:inline;
+	
+}
+
+.p2{
+	border : 1px solid black;
+	display:inline;
+	position:relative;
+	right:0px;
+}
+
+/* le type inline block permet de mettre tout les elements en inline mais en peut modifier la largeur ainsi que la hauteur*/
+/* display none permet de rendre l'element html non visible */
+
+/******************** position **************/
+
+/* prend : 
+	static : l'element en peut pas le bouget ni avec top ni rien il reste a sa palce d'origine 
+	fixed: l'element sort du flux de la page et restera fix dans sa place meme si en scrol la page 
+	relative: on peut utiliser top left right si en veut pour depalcer l'element 
+*/
+
+/* a cause de la propriéte position en risque qu'il aura des chauvochement et en utilise z-index pour determiner le qu'elle doit etre au dessus de l'autre */

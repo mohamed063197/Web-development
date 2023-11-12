@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<title> Formulaires </title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="audiostyle.css">
+	</head>
+		
+	<body>
+		<form method="post"action="traitement.php"><!-- post sert a dire que les champs ne sont pas limite et action la page php qui sert a traiter les données --> 
+			
+			<label for="first_name"> First Name </label>
+			<input type="text" id="first_name" name="first_name">
+			
+			<label for="name"> Name </label>
+			<input type="text" id="name" name="name">
+			
+			<label for="password"> Votre Mot de passe : </label>
+			<input type="password" id="password" name="password">
+			
+			<label for="site"> Mon site web :</label>
+			<input type="url" id="site" name="site">
+			
+			<label for="numero-tel"> Numero Tel : </label>
+			<input type="number" id="numero-tel" name="numero-tel">
+			
+			<label for="dateNaissance"> Votre Date De Naissance </label>
+			<input type="Date" id="dateNaissance" name="dateNaissance">
+			
+			<label for="presentation"> Presentation </label>
+			<textarea id="presentation" name="presentation"> Une Petite Presenation </textarea>
+			
+			<input type ="radio" id="homme" name="sexe">
+			<label for="homme"> Homme </label>
+			
+			<input type ="radio" id="femme" name="sexe">
+			<label for ="femme"> Femme </label>
+			
+			
+			<input type="submit" value="Envoyer">
+			
+		</form>
+	</body>
+</html>
