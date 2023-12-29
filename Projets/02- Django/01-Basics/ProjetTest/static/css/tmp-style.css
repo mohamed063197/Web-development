@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+/* Text Alignement */
+.text-center{
+  text-align:center;
+}
+
+
+
+
+
+/* configuration button Link */
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+
+}
+
+body {
+
+  position :relative;
+  top:5rem;
+  right:0;
+  left:0;
+
+  font-family: inter, "Open Sans", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #212529;
+  text-align: left;
+
+  background-color: #fff;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+/*-------------------- header ----------------------*/
+
+
+
+
+
+.elements-row{
+  width:30%;
+}
+
+.element-column{
+  margin-top:1rem;
+  margin-bottom: 1rem;
+}
+
+.competence-content{
+align-items: flex-start;
+}
+
+.card-content-competence{
+    align-items: stretch;
+}
+
+
+
+/******* Portfolio ******/
+#portfolio.section{
+  color:#fff;
+}
+@media screen and (max-width: 696px) and (min-width: 0px){
+  .section-content-pf{
+    flex-direction: column;
+  }
+}
+/* --------------- contact --------*/
+
+.section-content-work{
+  flex-direction: column;
+}
+.section-content-work img{
+  width: 100%;
+}
+.footer {
+  height: 60px;
+}
+.card-content-contact{
+  justify-content: space-between;
+}
+.card-icon{
+  width:100%;
+  margin-left:.5rem;
+  margin-right:.5rem;
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: var(--rounded);
+}
+.container-contact .icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.phone::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f095";
+  display: inline-block;
+  width: 30px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.mail::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0e0";
+  display: 30px;
+  height: auto;
+  margin-right: 15px;
+
+}
+
+.RC{
+  display:inline-block;
+}
+
+
+@media screen and (max-width: 990px) and (min-width: 0px){
+  .elements-row{
+    width:100%;
+  }
+  .card-content-contact{
+    flex-direction: column;
+  }
+  .card-body-contact{
+    width:100%;
+  }
+  .card-icon{
+    margin-bottom: 1rem;
+    margin-left:0;
+    margin-right:0;
+  }
+  .RC{
+    display:block;
+  }
+}

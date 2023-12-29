@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- CSS IMPORTS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+     <!-- TITLE -->
+    <title class="title">{% block title %} No Title {% endblock %}</title>
+
+</head>
+<body>
+    
+    <div class="body">
+        <!-- Navbar -->
+        {% include 'includes/_navbar.html'%}
+
+        <!-- Content -->
+        {% block body %} No Content  {% endblock %} 
+    </div>
+    
+    <div class="footer"> 
+        <!-- Footer  -->
+        {% include 'includes/_footer.html'%}    
+    </div>
+
+</body>
+</html>

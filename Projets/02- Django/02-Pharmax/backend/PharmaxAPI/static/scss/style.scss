@@ -1,0 +1,34 @@
+@import "imports.scss";
+
+.body{
+    font-size: 1.6rem;
+}
+
+
+h1{
+    text-align: center;
+}
+body{
+    padding:30px;
+}
+.divider{
+    border-top: 1px solid lightgray;
+}
+.count{
+    font-style: italic;
+    color:gray;
+}
+.items{
+    border:1px solid lightgray;
+    padding:0px;
+    
+}
+.item{
+    list-style: none;
+    padding:20px 30px;
+    text-align: center;
+}
+.title{
+    padding:0px;
+    margin:0px;
+}

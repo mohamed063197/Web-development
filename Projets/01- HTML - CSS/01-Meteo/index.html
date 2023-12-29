@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Projet Météo</title>
+        <meta charset="utf-8">
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+       <link rel="stylesheet" href="style.css">
+        <script src='loc.js' async></script>
+
+    </head>
+    
+    <body>
+        <header class="header"> 
+            <div class="container">
+                <h1 id="pos" class="title big-title"></h1>
+                <div class="heure">
+                    Il est  <span id="h" class="value"></span> et la temperature actuelle est de
+                </div>
+
+                <div class="main">
+                    <div class="temperature">
+                        <p id="temp" class="temp"></p>
+                        <div class="temp_min_max">
+
+                            <div class="content">
+                                <p id="temp_min" class="value"></p>
+                                <span class="title">Min</span>
+                            </div>
+
+                            <div class="content">
+                                <p id="temp_max" class="value"></p>
+                                <span class="title">Max</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="unite">
+                        <span id="degre" class="active">°C</span>
+                        <span> I </span>
+                        <span id="farad" class="">°F</span>
+                    </div>
+                </div><!-- fin main -->
+
+                <div class="humidite_vent">
+                    <div class="content">
+                        <p  class="title">Humidité</p>
+                        <span id="humidity" class="value"></span>
+                    </div>
+
+                    <div class="content">
+                        <p class="title">Vent(km/h)</p>
+                        <span id="wind" class="value"></span>
+                    </div>
+
+                </div>
+                <p id="description" class="title">
+                    
+                </p>
+            </div>
+        </header>
+
+    </body>
+</html>

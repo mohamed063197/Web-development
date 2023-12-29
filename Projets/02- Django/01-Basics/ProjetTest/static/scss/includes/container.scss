@@ -1,0 +1,27 @@
+/* Container */
+.container, .container-fluid{
+    box-sizing: border-box;
+    margin: 0px auto;
+    margin-top:1.5rem;
+    margin-bottom: 1.5rem;
+}
+.container {
+  width: calc(100% - var(--container-padding)*2);
+  max-width: calc(var(--container-width) - var(--container-padding)*2);
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+  padding-left: calc(50% - var(--container-width)/2 + var(--container-padding)*2);
+  padding-right: calc(50% - var(--container-width)/2 + var(--container-padding)*2);
+}
+
+@media only screen and (max-width: 1000px) {
+  .container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}

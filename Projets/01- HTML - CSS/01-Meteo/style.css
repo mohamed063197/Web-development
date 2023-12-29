@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');*{
+    padding:0px;
+    margin:0px;
+    box-sizing: border-box;
+}
+
+/*  Init */
+.header .title,
+.header .big-title,
+.header .heure{
+    letter-spacing: .2rem;
+    text-align: center;
+}
+
+.big-title{
+    padding-top:20px;
+    font-size:2rem;
+}
+
+
+/* Body */
+body{
+    margin:0px;
+    padding:0px;
+    font-family: inter, sans-serif;
+    font-size:16px;
+    font-weight: normal;
+}
+
+.header{
+    background-color: #5ABFB5;
+    color: #fff;
+    text-align: center;
+    height: 100vh;
+    border: 1px solid #5ABFB5;
+    font-size: 1.2rem;
+}
+
+.header .container{
+    margin:auto;
+    margin-top: 40px;
+    display: grid;
+    grid-row-gap:40px;
+    width: 1024px;
+    
+}
+
+
+.main{
+    display:flex;
+    justify-content: center;
+}
+
+header .temp{
+    font-size:128px;
+}
+
+.header .content{
+    display:inline-block;
+    width:48%;
+}
+
+.header .content .value{
+    display: inline-block;
+    width:100%;
+    margin-bottom:15px;
+    font-size: 1.8rem;
+}
+
+
+.header .main .unite{
+    font-size: 1.8rem;
+    font-weight: 200;
+}
+
+
+.header .main .degre:hover, .farad:hover{
+    text-shadow: 0 0 8px #404040;
+}
+
+.header .unite .active{
+    font-weight: normal;
+}
+
+
+.header .humidite_vent{
+    display:flex;
+    justify-content: space-between;
+    
+}
+
+.header .humidite_vent .title{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+.header .humidite_vent .value{
+    font-size: 3rem;
+}
+
+.header .content .title{
+    margin-bottom: 2.5rem;
+    letter-spacing: .2rem;
+
+}
+
+
+
+
