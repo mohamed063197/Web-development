@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-03i8zx7lqb=2-phqa$m#)d3yxtwc*%dqxt7hhs($05yhvi$+p*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    
+    '127.0.0.1',
+    '10.0.2.2',
 ]
 
 
@@ -41,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'medecine',
-    'api',
+    'FAQ',
     'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -55,12 +58,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
-
 
 ROOT_URLCONF = 'PharmaxAPI.urls'
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -89,8 +93,12 @@ WSGI_APPLICATION = 'PharmaxAPI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'medev_pharmax_24001',
+        'USER': 'postgres',
+        'PASSWORD': 'tharalina06',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -123,6 +131,7 @@ LANGUAGES = [
     ('en', 'English'),
     ('fr', 'Français'),
 ]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -133,18 +142,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATICS_DIR = os.path.join(BASE_DIR, 'static')
+STATICS_DIR = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (
     STATICS_DIR,
     "/var/www/static/",
 )
 
-MEDIA_URL='media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

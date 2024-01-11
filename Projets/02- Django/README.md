@@ -41,6 +41,41 @@ Remarque:
 Une fois satisfait de la base de données je met ca :
 - python manage.py migrate
 
+# Postgres psql
+## Demarer le service postgresql
+1. sudo -s
+2. service postgresql [start/stop/kill] OR sudo systemctl [start/stop] postgresql : démarrer le serveur
+3. service postgresql status OR sudo systemctl status postgresql : vérifier le statut
+## Connecter a postgresql
+- sudo -u [superuser] psql -> connection avec un utilisateur
+- psql -U [superuser] -d [database] -h [host] -> connection avec un utilisateur a une base de données.
+
+
+## Afficher les utilisateur
+- \du
+## ajouter un utilisateur
+- CREATE ROLE med063197 WITH LOGIN PASSWORD 'tharalina06';
+## Afficher les roles d'un utilisateur
+- SELECT rolname, rolsuper, rolcreaterole, rolcreatedb, rolcanlogin FROM pg_roles WHERE rolname = 'med063197';
+## Ajouter un role
+- ALTER ROLE [username] WITH [CREATEROLE, CREATEDB]
+- ALTER USER med063197 CREATEDB; : ajouter des privilèges
+
+## Donner a l'utilisateur med063197 tout les privileges sur toutes les tables
+- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO med063197;
+
+## Afficher les bases de données
+\list : pour lister tout les base de données qui sont dans l'ordianteur
+## Creation d'une base de données
+CREATE DATABASE [name_database];
+## Connection en une base de données
+\c [database]
+## Afficher les table d'une base de données
+\dt
+## Affichier les champs d'une table
+\d [tablename]
+
+
 # Sass:
 pour généré un fichier
 

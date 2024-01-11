@@ -1,0 +1,116 @@
+
+{% extends 'extends/base.html' %}
+{% load humanize %}
+<!-- Title -->
+{% block title %} item.PAGE_TITLE {% endblock %}
+
+<!-- Header:Banner -->
+{% block banner %} 
+
+{% endblock %} 
+
+<!-- Content  -->
+{% block body %} 
+<div class="container">
+  <!-- Content here -->
+  
+  <h3 class="text-center">{{item.PAGE_TITLE|stringformat:"upper"}}</h3>
+  <div class="mb-3"></div>
+  <!-- Search form -->
+  
+  <!-- FAQ List -->
+      <div class="container">
+        <form class="form-inline" style="display: flex;" method="GET">
+          <input class="form-control form-control-sm mr-3" type="text" placeholder="FAQ: Search by title or description"
+            aria-label="Search" name="key_word" value="{% if search %} {{search}} {% endif %}">
+          <!--<a href="{% url 'medecine:index' %}?title={{search}}" type="button" class="btn btn-block" data-mdb-ripple-init> <i class="fas fa-search" aria-hidden="true"></i></a>-->
+        </form>
+        <div class="mb-1"></div>
+        <p class="count" style="font-style: italic;font-size: .9rem;">{{data.end_index}}/{{count}} {{ data|length|pluralize:"FAQ,FAQs" }}</p>
+        {{medecine.pk}}
+        {% with app_name="FAQ" %}
+          {% with url_name=app_name|add:":add"%}
+            <a href="{% url FAQ:add m=medecine.pk %}" type="button" class="btn btn-success" style="text-align: right;"><i class="fa-solid fa-add" style="color:#FFF"></i>ADD</a>
+          {% endwith %}
+        {% endwith %}
+       
+        <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="fw-bold">#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th class="text-center">online</th>
+                <th>Slug</th>
+                <th>Sound</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in data %}
+              <tr>
+                <td scope="row" class="fw-bold">{{ data.start_index|add:forloop.counter|add:-1}}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.desc }}</td>
+                <td class="text-center">{% if item.online %} 
+                  <i class="fa-solid fa-circle-check" style="color:#218838"></i>
+                    {% else %}
+                      <i class="fa-solid fa-circle-xmark" style="color:#c82333"></i>
+                     {% endif %}
+                </td>
+                <td>{{ item.slug }}</td>
+                <td>
+                      {% if item.sound %}
+                        {% with app_name=data.0.APP_NAME %}
+                          {% with url_name=app_name|add:".sound.url" %}
+                          <img class="card-img-top" src="{{url_name}}" alt="{{item.title}}" style="width:40px; height: 40px;">
+                          {% endwith %}
+                        {% endwith %}
+                      {% endif %}
+                  </td>
+                  <td>
+                    
+                    {% with app_name=data.0.APP_NAME %}
+                      {% with url_name=app_name|add:":details" param=item.pk %}
+                      <a href="{% url url_name m=medecine.pk id=param %}" type="button"  type="button" class="btn btn-block" data-mdb-ripple-init><i class="fa-solid fa-eye" style="color:#0b5ed7"></i></a>
+                      {% endwith %}
+                      {% with url_name=app_name|add:":update" param=item.pk %}
+                      <a href="{% url url_name m=medecine.pk id=param %}" type="button"  type="button" class="btn btn-block" data-mdb-ripple-init><i class="fa-solid fa-pencil" style="color:#218838"></i></a>
+                      {% endwith %}
+                      {% with url_name=app_name|add:":delete" param=item.pk %}
+                      <a href="{% url url_name m=medecine.pk id=param %}" type="button"  type="button" class="btn btn-block" onclick="return confirm('Are you sure you want to delete this medecine ?');" data-mdb-ripple-init><i class="fa-solid fa-square-minus" style="color:#c82333"></i></a>
+                      {% endwith %}
+                    {% endwith %}
+                  </td>    
+              </tr>
+              {% empty %}
+                  <h2>Pas d'element</h2>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>  
+        {% if data.has_other_pages %}
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            
+              <li class="page-item"><a class="page-link" {% if data.has_previous %} href="?page={{data.previous_page_number}}" {% endif %}>Previous</a></li>
+            
+            {% for page_number in data.paginator.page_range %}
+              <li class="page-item "><a class="page-link {% if data.number == page_number %} bg-light fw-bold {% endif %}" href="?page={{page_number}}" >{{page_number}}</a></li>
+            {% endfor %}
+            
+              <li class="page-item"><a class="page-link" {% if data.has_next %} href="?page={{data.next_page_number}}" {% endif %}>Next</a></li>
+            
+          </ul>
+        </nav>
+        {% endif %}
+        </div>
+          <div class="divider"></div>
+          
+          
+  
+</div>
+  
+
+{% endblock %}
