@@ -2,7 +2,7 @@
 {% extends 'extends/base.html' %}
 
 <!-- Title -->
-{% block title %} item.PAGE_TITLE {% endblock %}
+{% block title %} {{PAGE_TITLE}} - {{ medecine.title }} {% if type == 'details' %} DETAILS {% else %} UPDATE {% endif %} {% endblock %}
 
 <!-- Header:Banner -->
 {% block banner %} 
@@ -57,7 +57,7 @@
         {% if type == 'details' %} 
             {% with app_name=item.APP_NAME %}
                 {% with url_name=app_name|add:":index" %}
-                    <a href="{% url url_name %}" class="btn btn-danger" class="btn btn-block"><i class="fa fa-arrow-left" style="color:#FFF"></i>List of medecine</a>
+                    <a href="{% url url_name m=medecine.pk %}" class="btn btn-danger" class="btn btn-block"><i class="fa fa-arrow-left" style="color:#FFF"></i>List of medecine</a>
                 {% endwith %}
             {% endwith %}
         {% else %} 
@@ -67,7 +67,7 @@
             </button>
             {% with app_name=item.APP_NAME %}
                 {% with url_name=app_name|add:":index" %}
-                    <a href="{% url url_name %}" class="btn btn-danger" class="btn btn-block" onclick="return confirm('Are you sure you want to cancel?');"><i class="fa fa-times" aria-hidden="true"></i>
+                    <a href="{% url url_name m=medecine.pk %}" class="btn btn-danger" class="btn btn-block" onclick="return confirm('Are you sure you want to cancel?');"><i class="fa fa-times" aria-hidden="true"></i>
                         Cancel
                     </a>
                 {% endwith %}

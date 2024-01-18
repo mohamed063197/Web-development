@@ -8,8 +8,9 @@ from django.shortcuts import get_object_or_404, render,redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+import logging
 
-
+log = logging.getLogger('log')
 
 # Create your views here.
 
@@ -65,20 +66,27 @@ def index(request):
     else:
         data = Medecine.objects.filter(Q(title__icontains=request.GET.get('key_word')) | Q(desc__icontains=request.GET.get('key_word'))).order_by('id')   
     try:
-        paginator = Paginator(data, 10)# data, max_data_in_page
+        paginator = Paginator(data, 5)# data, max_data_in_page
         page = request.GET.get('page',1)
         data = paginator.page(page)
     except PageNotAnInteger:
         data = paginator.page(1)
     except EmptyPage:
         data = paginator.page(paginator.num_pages)
+    context = {
+        'data':data, 
+        'search': request.GET.get('key_word'), 
+        'count':paginator.count,
+        'PAGE_TITLE': 'MEDECINES',
+        }
     
-    return render(request, 'medecine/index.html', {'data':data, 'search': request.GET.get('key_word'), 'count':paginator.count})
+    return render(request, 'medecine/index.html', context)
 
 def add(request):
     context={
         'item':None,
         'APP_NAME':Medecine().get_app_name(),
+        'PAGE_TITLE': 'MEDECINES',
     }
     if request.method== 'POST':
         item = Medecine()
@@ -99,12 +107,14 @@ def add(request):
                     'item':Medecine(),
                     'APP_NAME':Medecine().get_app_name(),
                     'errors':{},
+                    'PAGE_TITLE': 'MEDECINES',
                 }
                 return render(request, 'medecine/add.html', context)
         context = {
             'item': item,
             'APP_NAME':Medecine().get_app_name(),
             'errors': errors,
+            'PAGE_TITLE': 'MEDECINES',
         } 
 
     return render(request, 'medecine/add.html', context)
@@ -121,7 +131,8 @@ def update(request, id=None):
     item = get_object_or_404(Medecine, pk = id) 
     context = {
         'item':item,
-        'type':'update'
+        'type':'update',
+        'PAGE_TITLE': 'MEDECINES',
     }    
     
     if request.method== 'POST':
@@ -135,7 +146,8 @@ def update(request, id=None):
             context={
                 'item':item,
                 'errors':errors,
-                'type':'update'
+                'type':'update',
+                'PAGE_TITLE': 'MEDECINES',
             }
         else:
             if not item.db_input_control(type='update'):
@@ -143,7 +155,8 @@ def update(request, id=None):
                 context={
                     'item':item,
                     'errors':errors,
-                    'type':'update'
+                    'type':'update',
+                    'PAGE_TITLE': 'MEDECINES',
                 }
             else:
                 item.save()
@@ -153,7 +166,8 @@ def update(request, id=None):
         context = {
             'item': item,
             'errors': errors,
-            'type':'update'
+            'type':'update',
+            'PAGE_TITLE': 'MEDECINES',
         } 
     return render(request, 'medecine/update.html', context)
 
@@ -165,7 +179,8 @@ def details(request, id=None):
     item = get_object_or_404(Medecine, pk = id) 
     context = {
         'item':item,
-        'type':'details'
+        'type':'details',
+        'PAGE_TITLE': 'MEDECINES',
     }    
     
     return render(request, 'medecine/update.html', context)

@@ -4,9 +4,10 @@ from .Utils.Errors import Error
 
 # Create your models here.
 class FAQ(models.Model):
-    title = models.CharField(max_length=150, null= False, default="Pas de titre")
-    desc = models.TextField(null = False, default = "Pas de description") 
+    title = models.CharField(max_length=150, null= False)
+    desc = models.TextField(null = False) 
     desc_sound = models.FileField(upload_to='sounds/', blank = True, null = True)
+    online = models.BooleanField(default=False)
     slug = models.SlugField(null = False, default='slug')
     medecine = models.ForeignKey(Medecine, on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -19,21 +20,19 @@ class FAQ(models.Model):
         verbose_name = ('FAQ')
         verbose_name_plural = ('FAQs')
 
-
     """
         SETTINGS 
     """
-
     def get_page_title(self):
         return self.PAGE_TITLE
 
     def get_app_name(self):
         return self.APP_NAME
+    
     """
         INPUT CONTROL 
     """
-
-    def input_control_singIn(self, title, desc,online, slug, medecine, desc_sound):
+    def input_control(self, title, desc,online, slug, medecine, desc_sound):
         self.errors.clear()
         title_valid = self.set_title(title)
         desc_valid = self.set_desc(desc)
@@ -41,11 +40,11 @@ class FAQ(models.Model):
         slug_valid = self.set_slug(slug)
         medecine_valid = self.set_medecine(medecine)
         desc_sound_valid = self.set_desc_sound(desc_sound)
-        return title_valid and desc_valid and desc_sound_valid 
+        return title_valid and desc_valid and desc_sound_valid and online_valid and slug_valid and medecine_valid
     
     def db_input_control(self, type='add', medecine = None):
         db_title_valid = self.db_set_title(type=type)
-        db_medecine_valid = self.db_set_medecine(medecine = medecine)
+        #db_medecine_valid = self.db_set_medecine(medecine = medecine)
         return (db_title_valid)
     
     def db_set_title(self, type):
@@ -56,12 +55,8 @@ class FAQ(models.Model):
             return False
         return True
     
-    def db_set_medecine(self, medecine):
-        self.db_errors.clear()
-        count = FAQ.objects.filter(medecine__iexact = self.medecine).count()
-        if not((count == 0 and type == 'add') or (count <= 1 and type == 'update')):
-            self.db_errors[Error.MEDECINE] = "Title already exist" 
-            return False
+    def db_set_medecine(self, type):
+        
         return True
     
     def get_errors_dict(self):
@@ -72,8 +67,7 @@ class FAQ(models.Model):
     
     """
         SETTER
-    """
-        
+    """   
     def set_title(self, ntitle):
         self.title = ntitle
         if not self.title:
@@ -89,7 +83,7 @@ class FAQ(models.Model):
         return True
     
     def set_online(self, online):
-        self.favorite = online
+        self.online = online
         return True
     
     def set_slug(self, slug):
@@ -99,10 +93,12 @@ class FAQ(models.Model):
             return False
         return True
     
-    def db_set_medecine(self, medecine):
+    def set_medecine(self, medecine):
         self.medecine = medecine
         if not self.medecine:
-            self.errors[Error.MEDECINE] = 'Medecine is empty' 
+            #self.errors[Error.MEDECINE] = 'Medecine is empty'
+            return False
+        return True
     
     def set_desc_sound(self, ndesc_sound):
         self.desc_sound = ndesc_sound
@@ -116,6 +112,9 @@ class FAQ(models.Model):
     """
     def get_title(self):
         return self.title
+    
+    def get_medecine(self):
+        return self.medecine
     
     def get_desc(self):
         return self.desc

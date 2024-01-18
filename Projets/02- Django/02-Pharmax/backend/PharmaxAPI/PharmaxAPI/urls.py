@@ -20,14 +20,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import index
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = "index"),
     path('medecine/', include('medecine.urls', namespace='medecine')),#namespace c'est pour differencier les liens de different application
     path('FAQ/', include('FAQ.urls', namespace='FAQ')),
-] + static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+] 
 
 
 if settings.DEBUG:
@@ -35,3 +33,6 @@ if settings.DEBUG:
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+

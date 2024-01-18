@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'FAQ',
     'rest_framework',
     'debug_toolbar',
+    'patient'
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,8 @@ LOCALE_PATHS = [
 
 ROOT_URLCONF = 'PharmaxAPI.urls'
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+
 
 TEMPLATES = [
     {
@@ -142,13 +145,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATICS_DIR = os.path.join(BASE_DIR, 'static/')
-STATIC_URL = "/static/"
-STATICFILES_DIRS = (
-    STATICS_DIR,
-    "/var/www/static/",
-)
 
+
+STATIC_URL = "/static/" #seulement ca il va cherche le fichier static que dans l'application
+STATICFILES_DIRS  = [
+    os.path.join(BASE_DIR, 'static'),
+]
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -159,6 +161,34 @@ INTERNAL_IPS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
 
-
+    'handlers': {
+        'mylog': {
+            'filename': os.path.join(BASE_DIR / 'log/error.log'),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'encoding': 'utf8',
+            'maxBytes' :1024*5,
+            'formatter' : 'verbose'
+        }
+    },
+    'loggers': {
+        'log': {
+            'handlers': ['mylog'],
+            'propagate': True,
+        },
+       
+    }
+}

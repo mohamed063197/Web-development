@@ -2,7 +2,7 @@
 {% extends 'extends/base.html' %}
 {% load humanize %}
 <!-- Title -->
-{% block title %} item.PAGE_TITLE {% endblock %}
+{% block title %} {{PAGE_TITLE}} {% endblock %}
 
 <!-- Header:Banner -->
 {% block banner %} 
@@ -14,7 +14,7 @@
 <div class="container">
   <!-- Content here -->
   
-  <h3 class="text-center">{{item.PAGE_TITLE|stringformat:"upper"}}</h3>
+  <h3 class="text-center">{{PAGE_TITLE}}</h3>
   <div class="mb-3"></div>
   <!-- Search form -->
   <!-- Search form -->
@@ -42,11 +42,13 @@
               <tr>
                 <th scope="col" class="fw-bold">#</th>
                 <th>Title</th>
-                <th>Description</th>
+                <th >Description</th>
                 <th class="text-center">online</th>
                 <th>Slug</th>
                 <th>Image</th>
                 <th>FAQs</th>
+                <th></th>
+                <th></th>
                 <th></th>
 
               </tr>
@@ -59,7 +61,7 @@
                
                 <td scope="row" class="fw-bold">{{ data.start_index|add:forloop.counter|add:-1}}</td>
                 <td>{{ item.title }}</td>
-                <td>{{ item.desc }}</td>
+                <td class="limiter-lignes">{{ item.desc }}</td>
                 <td class="text-center">{% if item.online %} 
                   <i class="fa-solid fa-circle-check" style="color:#218838"></i>
                     {% else %}
@@ -68,31 +70,32 @@
                 </td>
                 <td>{{ item.slug }}</td>
                 <td>
-                      {% if item.img %}
-                        {% with app_name=data.0.APP_NAME %}
-                          {% with url_name=app_name|add:".img.url" %}
-                          <img class="card-img-top" src="{{url_name}}" alt="{{item.title}}" style="width:40px; height: 40px;">
-                          {% endwith %}
-                        {% endwith %}
-                      {% endif %}
-                  </td>
-                  <td>
+                {% if item.img %}
+                    <img class="card-img-top" src="{{item.img.url}}" alt="{{item.title}}" style="width:40px; height: 40px;" accept="image/*">
+                {% endif %}
+                  
+                </td>
+                <td>
                     <a href="{% url 'FAQ:index' m=item.pk %}" type="button"  type="button" class="btn btn-block" target="_blank" data-mdb-ripple-init><i class="fa-solid fa-circle-question" style="color:#343a40"></i></a>
-                  </td>
+                </td>
 
-                  <td>
+                  <td >
                     {% with app_name=data.0.APP_NAME %}
                     {% with url_name=app_name|add:":details" param=item.pk %}
                     <a href="{% url url_name param %}" type="button"  type="button" class="btn btn-block" data-mdb-ripple-init><i class="fa-solid fa-eye" style="color:#0b5ed7"></i></a>
                     {% endwith %}
+                    </td>
+                    <td>
                     {% with url_name=app_name|add:":update" param=item.pk %}
                     <a href="{% url url_name param %}" type="button"  type="button" class="btn btn-block" data-mdb-ripple-init><i class="fa-solid fa-pencil" style="color:#218838"></i></a>
                     {% endwith %}
+                  </td>
+                  <td>
                     {% with url_name=app_name|add:":delete" param=item.pk %}
                     <a href="{% url url_name param %}" type="button"  type="button" class="btn btn-block" onclick="return confirm('Are you sure you want to delete this medecine ?');" data-mdb-ripple-init><i class="fa-solid fa-square-minus" style="color:#c82333"></i></a>
                     {% endwith %}
                     {% endwith %}
-                                 </td>
+                  </td>
                   
                                 
               </tr>

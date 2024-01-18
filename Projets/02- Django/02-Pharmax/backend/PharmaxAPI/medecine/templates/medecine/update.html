@@ -2,7 +2,7 @@
 {% extends 'extends/base.html' %}
 
 <!-- Title -->
-{% block title %} item.PAGE_TITLE {% endblock %}
+{% block title %} {{PAGE_TITLE}} - {% if type == 'details' %} DETAILS {% else %} UPDATE {% endif %} {% endblock %}
 
 <!-- Header:Banner -->
 {% block banner %} 

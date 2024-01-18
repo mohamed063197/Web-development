@@ -2,7 +2,7 @@
 {% extends 'extends/base.html' %}
 
 <!-- Title -->
-{% block title %} item.PAGE_TITLE{% endblock %}
+{% block title %} {{PAGE_TITLE}} - ADD {% endblock %}
 
 <!-- Header:Banner -->
 {% block banner %} 
@@ -61,7 +61,7 @@
         </button>
         {% with app_name=APP_NAME %}
           {% with url_name=app_name|add:":index" %}
-          <a href="{% url url_name m=medecine.pk %}" class="btn btn-danger" class="btn btn-block" onclick="return confirm('Are you sure you want to cancel?');"><i class="fa fa-times" aria-hidden="true"></i>Cancel</a>
+          <a href="{% url url_name %}" class="btn btn-danger" class="btn btn-block" onclick="return confirm('Are you sure you want to cancel?');"><i class="fa fa-times" aria-hidden="true"></i>Cancel</a>
           {% endwith %}
         {% endwith %}
     </form>
