@@ -1,6 +1,6 @@
 from django.db import models
 from medecine.models import Medecine
-from .Utils.Errors import Error 
+from Utils.Errors import Error 
 
 # Create your models here.
 class FAQ(models.Model):

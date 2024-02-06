@@ -21,10 +21,14 @@ from django.conf.urls.static import static
 from .views import index
 
 urlpatterns = [
+    #
     path('admin/', admin.site.urls),
     path('', index, name = "index"),
+    
+    #application
     path('medecine/', include('medecine.urls', namespace='medecine')),#namespace c'est pour differencier les liens de different application
     path('FAQ/', include('FAQ.urls', namespace='FAQ')),
+    path('patient/', include('patient.urls', namespace='patient')),
 ] 
 
 

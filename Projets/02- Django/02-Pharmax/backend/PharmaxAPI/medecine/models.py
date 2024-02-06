@@ -1,14 +1,11 @@
 from django.db import models
 from patient.models import Patient
-from .Utils.Errors import Error
+from Utils.Errors import Error
 
 
 # Create your models here.
 
 from django.contrib.auth.models import User   
-
-
-    
 
 #---------------------------------------------------------------------------------------------------------------
 

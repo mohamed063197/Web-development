@@ -160,6 +160,10 @@ INTERNAL_IPS = [
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.dib.models.BigAutoField'
+
+#Costum user
+AUTH_USER_MODEL='patient.Patient'
 
 LOGGING = {
     'version': 1,

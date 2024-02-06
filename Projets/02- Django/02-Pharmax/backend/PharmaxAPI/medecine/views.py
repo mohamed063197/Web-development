@@ -52,8 +52,7 @@ def api(request, *args, **kwargs):#request : le resultat de requests.get("url_na
         context = {
             'item': MedecineSerializer(item).data,
             'errors': json.dumps(errors),
-        } 
-
+        }
         
         return Response(context)
     

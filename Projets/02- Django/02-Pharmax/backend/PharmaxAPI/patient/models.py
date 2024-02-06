@@ -1,19 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from Utils.Errors import Error 
 
 # Create your models here.
 class Patient(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
-    """    name = models.CharField(max_length=200, null= True)
-    mail = models.EmailField(null = False, unique = True) 
-    pwd= models.CharField(null = False)
-    pseudo = models.CharField(null = False, unique = True)
-    """
-
     phone = models.CharField(max_length = 15)
     age = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
     errors = {}
+    db_errors = {}
     PAGE_TITLE = 'Patient'
     APP_NAME = 'patient'
     
@@ -33,48 +30,86 @@ class Patient(models.Model):
     """
         INPUT CONTROL 
     """
-
-    
-
-    def input_control_singIn(self, name, mail, pwd, pseudo, phone, age):
+    def input_control_singIn(self, name, username, mail, pwd, phone, age):
         self.errors.clear()
         name = self.set_name(name)
+        username = self.set_username(username)
         mail_valid = self.set_mail(mail)
         pwd_valid = self.set_pwd(pwd)
         pwd_c = self.set_pwd_c(pwd_c)
-        pseudo_valid = self.set_pseudo(pseudo)
         phone_valid = self.set_phone(phone)
         age_valid = self.set_age(age)
 
         return (name and 
+                username and
                 mail_valid and 
                 pwd_valid and
-                pseudo_valid and
                 phone_valid and
                 age_valid)
     
+    def db_input_control_singIn(self, type='add'):
+        db_mail_valid = self.db_set_mail(type=type)
+        db_username_valid = self.db_set_username(type=type)
+        return (db_mail_valid and
+                db_username_valid)
+    
+    def db_set_mail(self, type):
+        self.db_errors.clear()
+        count = self.account.objects.filter(mail__iexact = self.account.email).count()
+        if not((count == 0 and type == 'add') or (count <= 1 and type == 'update')):
+            self.db_errors[Error.MAIL] = "Mail already exist" 
+            return False
+        return True
+    
+    def db_set_username(self, type):
+        self.db_errors.clear()
+        count = self.account.objects.filter(username__iexact = self.account.username).count()
+        if not((count == 0 and type == 'add') or (count <= 1 and type == 'update')):
+            self.db_errors[Error.USERNAME] = "Username already exist" 
+            return False
+        return True
+    
+    def get_errors_dict(self):
+        return {key.value: value for key, value in self.errors.items()}
+    
+    def get_db_errors_dict(self):
+        return {key.value: value for key, value in self.db_errors.items()}
+    
+    """
+        SAVE
+    """
+    def save(self):
+        if not self.user.pk:
+            self.user.save()
+        super(Patient, self).save()
     """
         SETTER
     """
-
-        
     def set_name(self, name):
-        self.name = name
-        if not self.name:
+        self.account.last_name = name
+        if not self.account.last_name:
             self.errors[Error.NAME] = 'Name is empty'
             return False
         return True
     
+    def set_username(self, username):
+        self.account.username = username
+        if not self.account.username:
+            self.errors[Error.USERNAME] = 'Username is empty'
+            return False
+        return True
+    
+    
     def set_mail(self, mail):
-        self.mail = mail
-        if not self.mail:
+        self.account.email = mail
+        if not self.account.email:
             self.errors[Error.DESC] = 'Mail is empty'
             return False
         return True
     
     def set_pwd(self, pwd):
-        self.pwd = pwd
-        if not self.pwd:
+        self.account.password = pwd
+        if not self.account.password:
             self.errors[Error.PWD] = 'Password is empty'
             return False
         return True
@@ -83,13 +118,6 @@ class Patient(models.Model):
         self.pwd_c = pwd_c
         if not self.pwd_c == self.pwd:
             self.errors[Error.PWD_C] = 'Password and confirmation not equals'
-            return False
-        return True
-    
-    def set_pseudo(self, pseudo):
-        self.pseudo = pseudo
-        if not self.pseudo:
-            self.errors[Error.PSEUDO] = 'Pseudo is empty'
             return False
         return True
     
@@ -114,19 +142,20 @@ class Patient(models.Model):
         GETTER
     """
     def get_name(self):
-        return self.name
+        return self.account.last_name
+    
+    def get_username(self):
+        return self.account.username
     
     def get_mail(self):
-        return self.mail
+        return self.account.email
     
     def get_pwd(self):
-        return self.pwd
+        return self.account.password
     
     def get_pwd_c(self):
         return self.pwd_c
-    
-    def get_pseudo(self):
-        return self.pseudo
+
 
     def get_phone(self):
         return self.phone
